@@ -1,9 +1,32 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, cleanup, fireEvent, getByAltText } from 'react-testing-library';
+import 'jest-dom/extend-expect';
+
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('<App />', () => {
+	it('renders without crashing', () => {
+		render(<App />);
+		cleanup();
+	});
+
+	it('renders Hello World', () => {
+		const { getByText } = render(<App />);
+
+		const text = getByText(/hello world/i);
+
+		expect(text).toBeInTheDocument();
+		cleanup();
+	});
+
+	it('greets the team', () => {
+		const { getByText } = render(<App />);
+
+		const greetButton = getByText(/greet/i);
+
+		fireEvent.click(greetButton);
+
+		getByText(/hello web students/i);
+		cleanup();
+	});
 });

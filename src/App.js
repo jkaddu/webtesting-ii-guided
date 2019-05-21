@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Players from './players/Players';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	state = {
+		greeting: null,
+		players: [ { id: 1, name: 'Sam' }, { id: 1, name: 'Frodo' }, { id: 1, name: 'Gandalf' } ]
+	};
+
+	render() {
+		return (
+			<div className="App">
+				<h2>Hello World</h2>
+				<div>
+					<button onClick={this.greet}>Greet</button>
+					<div>{this.state.greeting}</div>
+					<Players players={this.state.players} />
+				</div>
+			</div>
+		);
+	}
+
+	greet = () => {
+		this.setState({ greeting: 'Hello Web Students' });
+	};
 }
 
 export default App;
